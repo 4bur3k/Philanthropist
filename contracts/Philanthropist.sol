@@ -13,8 +13,8 @@ contract Philanthropist {
     }
 
     function myBalance(address _address) public returns(uint){
-        emit Balance("Philanthropist Balance is", token.balOf(_address));
-       return token.balOf(_address);
+        emit Balance("Philanthropist Balance is", token.balanceOf(_address));
+       return token.balanceOf(_address);
     }
 
     function getAddress(string memory name) public view returns(address){
@@ -28,6 +28,10 @@ contract Philanthropist {
     function MakeCharity(address philanthropist, string memory name, uint value) public{
         token.transferFrom(philanthropist, CharityWallet[name], value);
         emit NewCharity("Complete!", value);
+    }
+
+    function WalletBalance(string memory name) public view returns(uint){
+        return token.balanceOf(CharityWallet[name]);
     }
 
     event Balance(string line, uint balance);
